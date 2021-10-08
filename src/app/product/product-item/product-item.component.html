@@ -1,0 +1,22 @@
+<div [class]="product.onSale ? 'card mb-3 onSale' : 'card mb-3'" 
+     style="max-width: 540px;">
+    <div class="row g-0 p-4">
+      <div class="col-md-4 d-flex flex-column justify-content-center">
+        <img src={{product.img}} class="img-thumbnail rounded-start" alt="Product Item">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body pb-0">
+          <h5 class="card-title">{{product.name}}</h5>
+          <h4 class="card-text">{{product.price.toString() + '.00'}}</h4>
+        </div>
+        <div class="d-flex justify-content-between ms-auto px-3 w-50">
+            <button class="btn btn-dark btn-small" 
+                    (click)="productsOnCartIncrease()">+</button>
+            <div class="display-6" >{{numberOfProducts}}</div>
+            <button [class]="isProductInCart() ? 'btn btn-large btn-dark' : 'btn btn-grey' " 
+                    (click)="productsOnCartDecrease()" 
+                    [disabled]="!isProductInCart()">-</button>
+        </div>
+      </div>
+    </div>
+  </div>
