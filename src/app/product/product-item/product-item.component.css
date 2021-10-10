@@ -1,5 +1,9 @@
 .onSale {
-    border: 3px solid green;
+    border: 4px solid green;
+}
+
+.normalPrice {
+    border: 2px solid black;
 }
 
 .btn-grey {

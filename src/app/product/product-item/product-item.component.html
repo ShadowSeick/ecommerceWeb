@@ -1,4 +1,4 @@
-<div [class]="product.onSale ? 'card mb-3 onSale' : 'card mb-3'" 
+<div [ngClass]="productClasses" 
      style="max-width: 540px;">
     <div class="row g-0 p-4">
       <div class="col-md-4 d-flex flex-column justify-content-center">
@@ -12,10 +12,13 @@
         <div class="d-flex justify-content-between ms-auto px-3 w-50">
             <button class="btn btn-dark btn-small" 
                     (click)="productsOnCartIncrease()">+</button>
-            <div class="display-6" >{{numberOfProducts}}</div>
-            <button [class]="isProductInCart() ? 'btn btn-large btn-dark' : 'btn btn-grey' " 
+            <select>
+              <option *ngFor="let numberProducts of dropDownNumberProducts"
+                    [value]="numberProducts">{{numberProducts}}</option>
+            </select>
+            <button class="btn btn-large btn-dark" 
                     (click)="productsOnCartDecrease()" 
-                    [disabled]="!isProductInCart()">-</button>
+                    *ngIf="isProductInCart()">-</button>
         </div>
       </div>
     </div>

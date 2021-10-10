@@ -10,12 +10,19 @@ export class ProductItemComponent implements OnInit {
 
   public product!: Product;
   public numberOfProducts!: number;
+  public productClasses!: Object;
+  public dropDownNumberProducts= [...new Array(21).keys()];
   
   constructor() { }
 
   ngOnInit(): void{
     this.product = new Product('New Product', 10.00, 'assets/img/product-stock-image.jpg');
     this.numberOfProducts = 0;
+    this.productClasses = {
+      "onSale": this.product.onSale,
+      "normalPrice": !this.product.onSale
+    }
+    console.log(this.dropDownNumberProducts);
   }
 
   productOnSale(): void {
