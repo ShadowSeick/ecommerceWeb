@@ -1,45 +1,44 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output } from '@angular/core';
+import { EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { Product } from 'src/app/model/product';
 
 @Component({
   selector: 'app-product-item',
   templateUrl: './product-item.component.html',
-  styleUrls: ['./product-item.component.css']
+  styleUrls: ['./product-item.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProductItemComponent implements OnInit {
 
-  public product!: Product;
-  public numberOfProducts!: number;
+  @Input() public product!: Product;
+  @Output() increaseProductsOnCart: EventEmitter<Product>;
+  @Output() decreaseProductsOnCart: EventEmitter<Product>;
+
   public productClasses!: Object;
   public dropDownNumberProducts= [...new Array(21).keys()];
   
-  constructor() { }
+  constructor() { 
+    this.increaseProductsOnCart = new EventEmitter<Product>();
+    this.decreaseProductsOnCart = new EventEmitter<Product>();
+  }
 
   ngOnInit(): void{
-    this.product = new Product('New Product', 10.00, 'assets/img/product-stock-image.jpg');
-    this.numberOfProducts = 0;
     this.productClasses = {
       "onSale": this.product.onSale,
       "normalPrice": !this.product.onSale
     }
-    console.log(this.dropDownNumberProducts);
   }
 
-  productOnSale(): void {
-    console.log('This product is on sale!');
-    this.product.onSale = !this.product.onSale;
+  onIncreaseProductsOnCart(event: Event): void {
+    this.increaseProductsOnCart.emit(this.product);
   }
 
-  productsOnCartIncrease(): void {
-    this.numberOfProducts++;
-  }
-
-  productsOnCartDecrease(): void {
-    this.numberOfProducts--;
+  onDecreaseProductsOnCart(event: Event): void {
+    this.decreaseProductsOnCart.emit(this.product);
   }
 
   isProductInCart(): boolean {
-    return this.numberOfProducts > 0;
+    return this.product.productsInCart > 0;
   }
 
 }

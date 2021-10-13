@@ -11,13 +11,13 @@
         </div>
         <div class="d-flex justify-content-between ms-auto px-3 w-50">
             <button class="btn btn-dark btn-small" 
-                    (click)="productsOnCartIncrease()">+</button>
+                    (click)="onIncreaseProductsOnCart($event)">+</button>
             <select>
               <option *ngFor="let numberProducts of dropDownNumberProducts"
-                    [value]="numberProducts">{{numberProducts}}</option>
+                    [value]="product.productsInCart">{{product.productsInCart}}</option>
             </select>
             <button class="btn btn-large btn-dark" 
-                    (click)="productsOnCartDecrease()" 
+                    (click)="onDecreaseProductsOnCart($event)" 
                     *ngIf="isProductInCart()">-</button>
         </div>
       </div>
